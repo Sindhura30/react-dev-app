@@ -31,12 +31,14 @@ ul li {
 }
 .res-card{
     display: flex;
+    flex-wrap: wrap;
 }
-.res-wrapper{
+.res-wrapper {
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
-    line-height:20px
+    line-height:20px;
+    max-width: min-content;
 }
 
 .delivery-time {
@@ -50,4 +52,24 @@ ul li {
 
 .rating-icon {
     padding-right: 2px;
+}
+
+.btn {
+    margin: 10px;
+}
+.shimmerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.shimmerBox {
+    background-color: #d3d3d3;
+    /* border: 1px solid red; */
+    width: 150px;
+    /* max-width: min-content; */
+    height: 200px;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex: auto;
 }

@@ -373,7 +373,7 @@ export const resList = [
               "Cafe",
               "Desserts"
             ],
-            "avgRating": 4.4,
+            "avgRating": 3.4,
             "parentId": "630",
             "avgRatingString": "4.4",
             "totalRatingsString": "1.2K+",
