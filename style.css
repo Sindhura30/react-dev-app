@@ -23,6 +23,7 @@ nav {
 ul {
     display: flex;
     justify-content: end;
+    margin-top: 20px
 }
 
 ul li {
@@ -36,7 +37,7 @@ ul li {
 .res-wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 18px;
     line-height:20px;
     max-width: min-content;
 }
@@ -64,12 +65,22 @@ ul li {
 }
 .shimmerBox {
     background-color: #d3d3d3;
-    /* border: 1px solid red; */
     width: 150px;
-    /* max-width: min-content; */
     height: 200px;
     margin: 20px;
     display: flex;
     flex-wrap: wrap;
     flex: auto;
+}
+.btn-login{
+    display: flex;
+    margin-right: 20px;
+    padding: 5px;
+    align-items: center;
+}
+.search-filter {
+    display: flex;
+}
+.search-container {
+    margin: 10px;
 }
