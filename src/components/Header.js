@@ -10,7 +10,7 @@ const Header = () => {
        <header>
             <img src={LOGO_URL} alt="logo" />
             <nav>
-                <ul>
+                <ul className="menu">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About us</Link></li>
                     <li><Link to="/contact">Contact</Link></li>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ResCard from './ResCard';
 import Shimmer from './Shimmer';
+import { RES_URL } from '../utils/constant';
+import { Link } from "react-router-dom";
 
 const ResContainer = () => {
 
@@ -10,7 +12,7 @@ const ResContainer = () => {
     const [searchText , setSearchText] = useState('');
 
     const fetchData = async () => {
-        const data = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.10197&lng=77.5863591&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING');
+        const data = await fetch(RES_URL);
         const response = await data.json();
         const restuarantList = response?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         setRestaurants(restuarantList);
@@ -63,7 +65,7 @@ const ResContainer = () => {
       ) : (
         <div className="res-card">
           {filteredRestaurants.map((restaurant) => (
-            <ResCard key={restaurant.info.id} restaurant={restaurant} />
+            <Link to={`/restuarants/${restaurant.info.id}`}><ResCard key={restaurant.info.id} restaurant={restaurant} /></Link>
           ))}
         </div>
       )}
