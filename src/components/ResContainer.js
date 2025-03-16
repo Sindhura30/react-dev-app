@@ -1,34 +1,28 @@
 import { useState, useEffect } from "react";
-import ResCard from './ResCard';
+import ResCard, { IsOpenLabel } from './ResCard';
 import Shimmer from './Shimmer';
-import { RES_URL } from '../utils/constant';
 import { Link } from "react-router-dom";
+import useRestaurantContainer from "../hooks/useRestaurantContainer";
 
 const ResContainer = () => {
 
-    const [restaurants, setRestaurants] = useState([]);
-    const [filteredRestaurants, setFilteredRestaurants] = useState([])
-
+    const { restaurants } = useRestaurantContainer();
+    const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants || []);
     const [searchText , setSearchText] = useState('');
 
-    const fetchData = async () => {
-        const data = await fetch(RES_URL);
-        const response = await data.json();
-        const restuarantList = response?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-        setRestaurants(restuarantList);
-        setFilteredRestaurants(restuarantList);
-    }
-
     useEffect(() => {
-        fetchData();
-    }, [])
+      setFilteredRestaurants(restaurants);
+  }, [restaurants])
+
+  const ResCardOpen= IsOpenLabel(ResCard);
 
 
   return (
-    <>
-      <div className="search-filter">
-        <div className="search-container">
+    <div className="flex w-[950px] flex-wrap">
+      <div className="search-filter flex m-3 w-[950px]">
+        <div className="search-container w-[35%] flex">
           <input
+          className="border-2 mr-2.5"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -48,28 +42,37 @@ const ResContainer = () => {
             Search
           </button>
         </div>
+        <div className="w-[25%] bg-blue-400 flex justify-center">
         <button
           className="btn"
           onClick={() => {
             let filteredList = restaurants.filter((res) => {
               return res.info.avgRating > 4;
             });
-            setRestaurants(filteredList);
+            setFilteredRestaurants(filteredList);
           }}
         >
           Top Rated Restuarants
         </button>
+        </div>
       </div>
       {!filteredRestaurants || filteredRestaurants?.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="res-card">
+        <div className="flex w-[950px] flex-wrap">
+        <div className="res-card flex flex-wrap">
           {filteredRestaurants.map((restaurant) => (
-            <Link to={`/restuarants/${restaurant.info.id}`}><ResCard key={restaurant.info.id} restaurant={restaurant} /></Link>
+            <Link to={`/restuarants/${restaurant.info.id}`}>
+              {restaurant?.info.isOpen ? 
+               <ResCardOpen key={restaurant.info.id} restaurant={restaurant} /> : 
+               <ResCard className="b" key={restaurant.info.id} restaurant={restaurant} />
+              }           
+              </Link>
           ))}
         </div>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

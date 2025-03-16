@@ -3,7 +3,7 @@ import { IMG_BASE_URL } from "../utils/constant";
 const ResCard = (restaurant) => {
     const { restaurant : { info } } = restaurant;
     return (
-        <div className='res-wrapper'>
+        <div className='res-wrapper flex flex-wrap w-[200px] m-3 bg-gray-200 p-2.5 rounded-md'>
             <div className='restuarant-badge'>
                 <img src={`${IMG_BASE_URL}/${info.cloudinaryImageId}`} />
             </div>
@@ -25,6 +25,17 @@ const ResCard = (restaurant) => {
             </p>
         </div>
     )
+}
+
+export const IsOpenLabel = () => {
+    return (props) => {
+        return (
+            <>
+                <label className="absolute bg-green-700 text-amber-50 p-1.5 m-1.5 rounded-xl">Open</label>
+                <ResCard {...props}/>
+            </>
+        )
+    }
 }
 
 export default ResCard;

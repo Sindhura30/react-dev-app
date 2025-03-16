@@ -1,4 +1,6 @@
-* {
+@import "tailwindcss";
+
+/* * {
     margin: 0;
     padding: 0;
 }
@@ -95,4 +97,4 @@ nav {
 .resData {
     margin: 15px;
     line-height: 30px;
-}
+} */
