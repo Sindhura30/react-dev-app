@@ -1,19 +1,26 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/cartSlice";
 import { IMG_BASE_URL } from "../utils/constant";
 
-const MenuItem = ( { category }) => {
+const MenuItem = ( { category, showList, setShowIndexContent }) => {
+
+    const dispatch = useDispatch();
+
     const { title, itemCards } = category?.card?.card;
 
-    const [showList, setShowList] = useState(false);
-
     const handleClick = () => {
-        setShowList(!showList);
+        setShowIndexContent();
+    }
+
+    const handleAddItem = (item) => {
+        dispatch(addItem(item))
     }
 
     return (
         <>
-        <div className="font-bold bg-gray-300 p-2 flex mb-2.5 shadow-2xl" onClick={handleClick}>
-            <h3 className="w-5/6">{title}</h3>
+        <div className="font-bold bg-gray-300 p-2 flex mb-2.5 shadow-gray-100" onClick={handleClick}>
+            <h3 className="w-5/6">{title} ({itemCards.length})</h3>
             <span className="w-1/6 flex justify-end">⬇️</span>
         </div>
         <div className="">
@@ -27,7 +34,7 @@ const MenuItem = ( { category }) => {
                         </div>
                         <div className="w-2/12">
                             <img className="w-full h-3/5 rounded-2xl" src={`${IMG_BASE_URL}/${item?.card?.info?.imageId}`} />
-                            <button className="absolute bg-green-700 text-white p-3 rounded-2xl mt-[-20px] mx-7">Add +</button>
+                            <button className="absolute bg-green-700 text-white p-3 rounded-2xl mt-[-20px] ml-[3%]" onClick={() => handleAddItem(item)}>Add +</button>
                         </div>
                     </div>
                 )

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ResCard, { IsOpenLabel } from './ResCard';
 import Shimmer from './Shimmer';
 import { Link } from "react-router-dom";
 import useRestaurantContainer from "../hooks/useRestaurantContainer";
+import UserContext from "../utils/userContext";
 
 const ResContainer = () => {
 
@@ -15,6 +16,8 @@ const ResContainer = () => {
   }, [restaurants])
 
   const ResCardOpen= IsOpenLabel(ResCard);
+
+  const {loggedInUser , setUserName} = useContext(UserContext);
 
 
   return (
@@ -56,6 +59,10 @@ const ResContainer = () => {
         </button>
         </div>
       </div>
+      <div className="w-[25%] flex justify-center">
+          <label for="name">Name</label>
+          <input value={loggedInUser} name="name" className='border-2 m-2' onChange={(e)=> setUserName(e.target.value)}  />
+        </div>
       {!filteredRestaurants || filteredRestaurants?.length === 0 ? (
         <Shimmer />
       ) : (

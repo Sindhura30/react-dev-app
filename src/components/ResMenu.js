@@ -2,10 +2,13 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../hooks/useRestaurantMenu";
 import MenuItem from "./MenuItem";
+import { useState } from "react";
 
 const ResMenu = () => {
 
   const { resId } = useParams();
+
+  const [showIndexContent, setShowIndexContent] = useState(null);
 
   const resMenu = useRestaurantMenu(resId);
 
@@ -22,8 +25,13 @@ const ResMenu = () => {
         <div className="resData w-[100%]">
           <h3 className="justify-center flex text-2xl font-bold">{name}</h3>
           <p className="justify-center flex ">{cuisines?.join(', ')} - {costForTwoMessage}</p>
-                {categories?.map(category => {
-                  return <MenuItem key={category?.card?.card?.categoryId} category={category} />
+                {categories?.map((category, index) => {
+                  return <MenuItem 
+                  key={category?.card?.card?.categoryId}
+                  category={category} 
+                  showList={index === showIndexContent && true}
+                  setShowIndexContent={() => setShowIndexContent(prevIndex =>  prevIndex === index ? null : index)}
+                  />
                 })}
         </div>
       )}

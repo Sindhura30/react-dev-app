@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constant";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
+import UserContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
     const [btnName, setBtnName] = useState('Login');
 
     const onlineStatus = useOnlineStatus();
+
+    const { loggedInUser } = useContext(UserContext)
+
+    const cartItems = useSelector((state) => state.cart.items)
 
     return (
     <div className="flex min-w-[950px] h-28">
@@ -23,10 +29,11 @@ const Header = () => {
                         <li className="inline px-4"><Link to="/">Home</Link></li>
                         <li className="inline px-4"><Link to="/about">About us</Link></li>
                         <li className="inline px-4"><Link to="/contact">Contact</Link></li>
-                        <li className="inline px-4"><Link to="/grocery">Grocery</Link></li>
+                        <li className="inline px-4"><Link to="/Cart">Cart ({cartItems.length})</Link></li>
                         <button className='btn-login' onClick={() => {
                             btnName === 'Login' ? setBtnName('Logout') : setBtnName('Login');
                         }}>{btnName}</button>
+                        <li className="inline px-4">{loggedInUser}</li>
                     </ul>
                 </nav>
             </div>
