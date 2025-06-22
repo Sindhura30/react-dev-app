@@ -3,7 +3,7 @@ import { IMG_BASE_URL } from "../utils/constant";
 const ResCard = (restaurant) => {
     const { restaurant : { info } } = restaurant;
     return (
-        <div className='res-wrapper flex flex-wrap w-[200px] m-3 bg-gray-200 p-2.5 rounded-md'>
+        <div  className='res-wrapper flex flex-wrap w-[200px] m-3 bg-gray-200 p-2.5 rounded-md' data-testid="card">
             <div className='restuarant-badge'>
                 <img src={`${IMG_BASE_URL}/${info.cloudinaryImageId}`} />
             </div>

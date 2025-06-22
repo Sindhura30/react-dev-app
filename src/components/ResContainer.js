@@ -8,6 +8,7 @@ import UserContext from "../utils/userContext";
 const ResContainer = () => {
 
     const { restaurants } = useRestaurantContainer();
+
     const [filteredRestaurants, setFilteredRestaurants] = useState(restaurants || []);
     const [searchText , setSearchText] = useState('');
 
@@ -33,6 +34,7 @@ const ResContainer = () => {
             }}
           />
           <button
+            data-testid="search"
             onClick={() => {
               let filteredResList = restaurants.filter((res) => {
                 return res.info.name
